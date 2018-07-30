@@ -29,3 +29,21 @@ its URL template name, in this case post_detail
 
 Add a {% csrf_token %} which Django provides to protect our form from cross-
 site scripting attacks
+
+Ch 7
+-For user authentication system, Django by default installs the auth app, which provides us with a User objects.
+-Used this User object to implement login, logout, and signup in our blog
+application.
+Django provides us with a default view for a login page via LoginView. All we need to
+add are a project-level urlpattern for the auth system, a login template, and a small
+update to our settings.py file.
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+{% csrf_token %} #prevent a XSS Attack
+{{ form.as_p }}  #form’s contents are outputted between paragraph tags
+<button type="submit">Login</button>
+</form>
+{% endblock content %}
